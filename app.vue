@@ -11,16 +11,18 @@
 </template>
 
 <script setup lang="ts">
+import { HealthScore } from './utils/types'
+
 const data: HealthScore[] = [
   {
-    title: "Engagement",
-    value: "0.19",
-    tresholds: ["0.05", "0.10", "0.15", "0.20"],
+    title: 'Engagement',
+    value: '0.19',
+    tresholds: ['0.05', '0.10', '0.15', '0.20'],
   },
   {
-    title: "Engagement",
+    title: 'Engagement',
     value: null,
-    tresholds: ["0.05", "0.10", "0.15", "0.20"],
+    tresholds: ['0.05', '0.10', '0.15', '0.20'],
   },
-];
+]
 </script>
