@@ -13,12 +13,16 @@
     <div class="meter__container">
       <div
         class="meter__unit"
-        :style="{ backgroundColor: showReversedMeter ? '#60cd8d' : '#e40039' }"
+        :style="{
+          backgroundColor: showReversedMeter ? Colors.GREEN : Colors.RED,
+        }"
       ></div>
       <div class="meter__unit"></div>
       <div
         class="meter__unit"
-        :style="{ backgroundColor: showReversedMeter ? '#e40039' : '#60cd8d' }"
+        :style="{
+          backgroundColor: showReversedMeter ? Colors.RED : Colors.GREEN,
+        }"
       ></div>
     </div>
   </div>
@@ -34,11 +38,11 @@ const props = defineProps({
   score: { type: String, required: true },
 })
 
-const percentageBackground: ComputedRef<Score> = computed(() => {
+const percentageBackground: ComputedRef<string> = computed(() => {
   if (props.score === 'low')
-    return props.showReversedMeter ? '#60cd8d' : '#e40039'
-  if (props.score === 'medium') return '#ffc341'
-  else return props.showReversedMeter ? '#e40039' : '#60cd8d'
+    return props.showReversedMeter ? Colors.GREEN : Colors.RED
+  if (props.score === 'medium') return Colors.YELLOW
+  else return props.showReversedMeter ? Colors.RED : Colors.GREEN
 })
 const percentageColor: ComputedRef<string> = computed(() => {
   if (props.showReversedMeter) {

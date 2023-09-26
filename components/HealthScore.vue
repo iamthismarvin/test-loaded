@@ -4,7 +4,7 @@
     <p class="health-score__score">{{ score || '---' }}</p>
     <div class="health-score__meter">
       <HealthScoreMeter
-        v-if="value"
+        v-if="value && score"
         :percentage="value"
         :tresholds="tresholds"
         :score="score"
@@ -26,7 +26,7 @@ const props = defineProps({
 })
 
 const score: ComputedRef<Score | null> = computed(() => {
-  if (props.value)
+  if (props.value) {
     if (
       +props.value >= +props.tresholds[0] &&
       +props.value < +props.tresholds[1]
@@ -38,6 +38,7 @@ const score: ComputedRef<Score | null> = computed(() => {
     )
       return 'medium'
     else return 'high'
+  } else return null
 })
 </script>
 

@@ -10,3 +10,9 @@ export interface HealthScore {
 export interface HealthScoreExtended extends HealthScore {
   showReversedMeter?: boolean
 }
+
+export enum Colors {
+  GREEN = '#60cd8d',
+  RED = '#e40039',
+  YELLOW = '#ffc341',
+}
