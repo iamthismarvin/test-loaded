@@ -1,13 +1,7 @@
 <template>
   <div class="meter">
     <div class="meter__percentage" :style="{ width: `${computedPercentage}%` }">
-      <div
-        class="meter__percentage-child"
-        :style="[
-          { backgroundColor: percentageBackground },
-          { color: percentageColor },
-        ]"
-      >
+      <div :class="['meter__percentage-child', percentageStyle]">
         {{ formatPercentage(percentage) }}%
       </div>
     </div>
@@ -59,22 +53,11 @@ const computedPercentage: ComputedRef<number> = computed(() => {
   return result
 })
 
-const percentageBackground: ComputedRef<string> = computed(() => {
+const percentageStyle: ComputedRef<string> = computed(() => {
   if (props.score === 'low')
-    return props.showReversedMeter ? Colors.GREEN : Colors.RED
-  if (props.score === 'medium') return Colors.YELLOW
-  else return props.showReversedMeter ? Colors.RED : Colors.GREEN
-})
-const percentageColor: ComputedRef<string> = computed(() => {
-  if (props.showReversedMeter) {
-    return props.score === 'low' || props.score === 'medium'
-      ? '#182034'
-      : 'white'
-  } else {
-    return props.score === 'high' || props.score === 'medium'
-      ? '#182034'
-      : 'white'
-  }
+    return props.showReversedMeter ? 'percentage--green' : 'percentage--red'
+  if (props.score === 'medium') return 'percentage--yellow'
+  else return props.showReversedMeter ? 'percentage--red' : 'percentage--green'
 })
 
 const formatPercentage = (percentage: string) => {
@@ -117,5 +100,23 @@ const formatPercentage = (percentage: string) => {
   background-color: #ffc341;
   border-radius: 0.25rem;
   height: 3px;
+}
+
+.percentage--green {
+  background-color: #60cd8d;
+}
+
+.percentage--red {
+  background-color: #e40039;
+  color: white;
+}
+
+.percentage--yellow {
+  background-color: #ffc341;
+}
+
+.percentage--green,
+.percentage--yellow {
+  color: #182034;
 }
 </style>
