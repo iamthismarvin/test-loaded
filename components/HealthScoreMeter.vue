@@ -43,16 +43,9 @@ const props = defineProps({
 // Note:
 // The following displays the correct position of the meter bar.
 // However, with the 1/3 meter design, it would make it seem like it's not rendering correctly.
-// To fix this, the bars (meter__unit) would have to change from a 1fr with in the grid to the correct
-// proportion of each segment depending on the thresholds given.
-
-// Example:
-// lowWidth = (threshold[1]-threshold[0]) / (threshold[3]-threshold[0])
-// mediumWidth = ...
-// highWidth = ...
-
-// Styling:
-// .medium__container {grid-template-columns: lowWidth mediumWidh highWidth;}
+// To fix this, the bars (meter__unit) would have to calculate individual sectors in the grid and
+// then get the percentage within that sector to position correctly in the meter__unit.
+// There are other options, but it would depend on the UX we'd be looking for.
 
 const computedPercentage: ComputedRef<number> = computed(() => {
   const min = +props.thresholds[0]
