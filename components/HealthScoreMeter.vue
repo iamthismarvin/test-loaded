@@ -80,7 +80,9 @@ const percentageColor: ComputedRef<string> = computed(() => {
 })
 
 const formatPercentage = (percentage: string) => {
-  return typeof +percentage === 'number' ? +percentage * 100 : percentage
+  return typeof +percentage === 'number'
+    ? (+percentage * 100).toFixed(0)
+    : percentage
 }
 </script>
 

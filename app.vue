@@ -15,7 +15,7 @@
 const data: HealthScoreExtended[] = [
   {
     title: 'Engagement',
-    value: '0.19',
+    value: '0.15',
     tresholds: ['0.05', '0.10', '0.15', '0.20'],
   },
   {
