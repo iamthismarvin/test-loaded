@@ -50,8 +50,13 @@ const props = defineProps({
 const computedPercentage: ComputedRef<number> = computed(() => {
   const min = +props.thresholds[0]
   const max = +props.thresholds[3]
-  const fullValue = max - min
-  return ((+props.percentage - min) / fullValue) * 100
+  const result = ((+props.percentage - min) / max - min) * 100
+
+  if (props.score === 'low' && result > 33) return 32.99
+  else if (props.score === 'medium' && result < 33) return 33
+  else if (props.score === 'medium' && result > 66) return 66
+  else if (props.score === 'high' && result < 66) return 66
+  return result
 })
 
 const percentageBackground: ComputedRef<string> = computed(() => {
