@@ -1,10 +1,10 @@
-export type Tresholds = [string, string, string, string]
+export type Thresholds = [string, string, string, string]
 export type Score = 'low' | 'medium' | 'high'
 
 export interface HealthScore {
   title: string
   value: string | null
-  tresholds: Tresholds
+  thresholds: Thresholds
 }
 
 export interface HealthScoreExtended extends HealthScore {

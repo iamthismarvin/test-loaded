@@ -35,7 +35,7 @@ import type { PropType } from 'vue'
 
 const props = defineProps({
   percentage: { type: String, required: true },
-  tresholds: { type: Object as PropType<Tresholds>, required: true },
+  thresholds: { type: Object as PropType<Thresholds>, required: true },
   showReversedMeter: Boolean,
   score: { type: String, required: true },
 })
@@ -44,10 +44,10 @@ const props = defineProps({
 // The following displays the correct position of the meter bar.
 // However, with the 1/3 meter design, it would make it seem like it's not rendering correctly.
 // To fix this, the bars (meter__unit) would have to change from a 1fr with in the grid to the correct
-// proportion of each segment depending on the tresholds given.
+// proportion of each segment depending on the thresholds given.
 
 // Example:
-// lowWidth = (treshold[1]-treshold[0]) / (treshold[3]-treshold[0])
+// lowWidth = (threshold[1]-threshold[0]) / (threshold[3]-threshold[0])
 // mediumWidth = ...
 // highWidth = ...
 
@@ -55,8 +55,8 @@ const props = defineProps({
 // .medium__container {grid-template-columns: lowWidth mediumWidh highWidth;}
 
 const computedPercentage: ComputedRef<number> = computed(() => {
-  const min = +props.tresholds[0]
-  const max = +props.tresholds[3]
+  const min = +props.thresholds[0]
+  const max = +props.thresholds[3]
   const fullValue = max - min
   return ((+props.percentage - min) / fullValue) * 100
 })

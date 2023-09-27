@@ -6,7 +6,7 @@
       <HealthScoreMeter
         v-if="value && score"
         :percentage="value"
-        :tresholds="tresholds"
+        :thresholds="thresholds"
         :score="score"
         :show-reversed-meter="showReversedMeter"
       />
@@ -21,20 +21,20 @@ import type { PropType } from 'vue'
 const props = defineProps({
   title: { type: String, required: true },
   value: { type: String, default: null },
-  tresholds: { type: Object as PropType<Tresholds>, required: true },
+  thresholds: { type: Object as PropType<Thresholds>, required: true },
   showReversedMeter: { type: Boolean, default: false },
 })
 
 const score: ComputedRef<Score | null> = computed(() => {
   if (props.value) {
     if (
-      +props.value >= +props.tresholds[0] &&
-      +props.value < +props.tresholds[1]
+      +props.value >= +props.thresholds[0] &&
+      +props.value < +props.thresholds[1]
     ) {
       return 'low'
     } else if (
-      +props.value >= +props.tresholds[1] &&
-      +props.value < +props.tresholds[2]
+      +props.value >= +props.thresholds[1] &&
+      +props.value < +props.thresholds[2]
     )
       return 'medium'
     else return 'high'
