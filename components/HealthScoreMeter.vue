@@ -1,13 +1,15 @@
 <template>
   <div class="meter">
-    <div
-      class="meter__percentage"
-      :style="[
-        { backgroundColor: percentageBackground },
-        { color: percentageColor },
-      ]"
-    >
-      {{ formatPercentage(percentage) }}%
+    <div class="meter__percentage" :style="{ width: `${computedPercentage}%` }">
+      <div
+        class="meter__percentage-child"
+        :style="[
+          { backgroundColor: percentageBackground },
+          { color: percentageColor },
+        ]"
+      >
+        {{ formatPercentage(percentage) }}%
+      </div>
     </div>
 
     <div class="meter__container">
@@ -36,6 +38,27 @@ const props = defineProps({
   tresholds: { type: Object as PropType<Tresholds>, required: true },
   showReversedMeter: Boolean,
   score: { type: String, required: true },
+})
+
+// Note:
+// The following displays the correct position of the meter bar.
+// However, with the 1/3 meter design, it would make it seem like it's not rendering correctly.
+// To fix this, the bars (meter__unit) would have to change from a 1fr with in the grid to the correct
+// proportion of each segment depending on the tresholds given.
+
+// Example:
+// lowWidth = (treshold[1]-treshold[0]) / (treshold[3]-treshold[0])
+// mediumWidth = ...
+// highWidth = ...
+
+// Styling:
+// .medium__container {grid-template-columns: lowWidth mediumWidh highWidth;}
+
+const computedPercentage: ComputedRef<number> = computed(() => {
+  const min = +props.tresholds[0]
+  const max = +props.tresholds[3]
+  const fullValue = max - min
+  return ((+props.percentage - min) / fullValue) * 100
 })
 
 const percentageBackground: ComputedRef<string> = computed(() => {
@@ -75,16 +98,19 @@ const formatPercentage = (percentage: string) => {
 }
 
 .meter__percentage {
-  background-color: magenta;
-  border-radius: 0.25rem;
+  display: flex;
   font-weight: bold;
   font-size: 0.9rem;
-  padding: 0.25rem;
+  justify-content: flex-end;
   position: absolute;
+  transform: translateY(0.25rem);
+  width: 100%;
 }
 
-.meter__percentage {
-  content: attr(value) '%';
+.meter__percentage-child {
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  transform: translateX(50%);
 }
 
 .meter__unit {

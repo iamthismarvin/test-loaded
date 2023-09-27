@@ -31,7 +31,7 @@ const data: HealthScoreExtended[] = [
   },
   {
     title: 'Other',
-    value: '0.255',
+    value: '0.25',
     tresholds: ['0.10', '0.20', '0.50', '0.80'],
   },
 ]
